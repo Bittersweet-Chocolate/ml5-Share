@@ -7,3 +7,5 @@
  */
 // 图片识别
 import './ml5-1.js'
+import './ml5-2.js'
+import './ml5.css'
