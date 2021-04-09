@@ -8,15 +8,17 @@
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
       mode: 'development',
       entry: './src/index.js',
       output: { //输出文件
-          path: resolve(__dirname + '/dist'),
+          path: resolve(__dirname, '/dist'),
           filename: 'main.js'
       },
       devServer: {
-        contentBase: resolve(__dirname, '/dist'),
+        //设置访问本地资源的目录
+        contentBase: './src',
         // 启动gzip压缩
         compress: true,
         // 端口号
@@ -61,5 +63,11 @@ module.exports = {
       new HtmlWebpackPlugin({
           template: './src/index.html'
       }),
+      new CopyWebpackPlugin([
+          { 
+            from: 'models/*',
+            to: 'dist/models'
+          }
+      ])
   ]
 }
